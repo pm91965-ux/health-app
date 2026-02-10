@@ -1,6 +1,6 @@
 
 import 'dotenv/config';
-import express from 'express';
+import express, { Request, Response, NextFunction } from 'express'; // Explicitly import Request, Response, NextFunction
 import cors from 'cors';
 import { PrismaClient } from '@prisma/client';
 import bcrypt from 'bcryptjs';
@@ -19,7 +19,7 @@ app.use(cors({ origin: process.env.FRONTEND_URL || '*' })); // IMPORTANT: Set FR
 
 // --- Authentication Routes ---
 
-app.post('/api/auth/register', async (req, res) => {
+app.post('/api/auth/register', async (req: Request, res: Response) => { // Use explicit types
   const { username, password } = req.body;
 
   if (!username || !password) {
@@ -44,7 +44,7 @@ app.post('/api/auth/register', async (req, res) => {
   }
 });
 
-app.post('/api/auth/login', async (req, res) => {
+app.post('/api/auth/login', async (req: Request, res: Response) => { // Use explicit types
   const { username, password } = req.body;
 
   if (!username || !password) {
@@ -70,12 +70,12 @@ app.post('/api/auth/login', async (req, res) => {
 
 // --- Authentication Middleware ---
 
-interface AuthRequest extends express.Request {
+interface AuthRequest extends Request { // Extend Request from express
   userId?: string;
   username?: string;
 }
 
-const authenticateToken = (req: AuthRequest, res: express.Response, next: express.NextFunction) => {
+const authenticateToken = (req: AuthRequest, res: Response, next: NextFunction) => {
   const authHeader = req.headers['authorization'];
   const token = authHeader && authHeader.split(' ')[1];
 
@@ -95,7 +95,7 @@ const authenticateToken = (req: AuthRequest, res: express.Response, next: expres
 
 // --- Protected Workout Routes (Requires Authentication) ---
 
-app.get('/api/workouts', authenticateToken, async (req: AuthRequest, res) => {
+app.get('/api/workouts', authenticateToken, async (req: AuthRequest, res: Response) => {
   try {
     const workouts = await prisma.workoutSession.findMany({
       where: { userId: req.userId },
@@ -109,7 +109,7 @@ app.get('/api/workouts', authenticateToken, async (req: AuthRequest, res) => {
   }
 });
 
-app.post('/api/workouts', authenticateToken, async (req: AuthRequest, res) => {
+app.post('/api/workouts', authenticateToken, async (req: AuthRequest, res: Response) => {
   const { date, exercises } = req.body;
   if (!date || !exercises || !Array.isArray(exercises)) {
     return res.status(400).json({ message: 'Date and exercises are required.' });
