@@ -24,6 +24,6 @@
     { "source": "/api/(.*)", "destination": "/backend/api/index.ts" },
     { "source": "/(.*)", "destination": "/frontend/$1" }
   ],
-  "installCommand": "npm install --prefix frontend && npm install --prefix backend",
-  "buildCommand": "npm run build --prefix frontend && npm run build --prefix backend"
+  "installCommand": "npm install --prefix backend && npm install --prefix frontend",
+  "buildCommand": "npm run build --prefix backend && npm run build --prefix frontend"
 }
