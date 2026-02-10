@@ -1,4 +1,4 @@
-export const getRecommendation = async () => {
+export const getRecommendation = async (_history?: any, _profile?: any, _nutrition?: any, _labs?: any, _focus?: any) => {
   // Stub: return empty plan
   return {
     reasoning: "AI integration is temporarily disabled.",
@@ -6,7 +6,7 @@ export const getRecommendation = async () => {
   };
 };
 
-export const analyzeSession = async () => {
+export const analyzeSession = async (_session?: any, _history?: any, _profile?: any) => {
   // Stub: return empty analysis
   return {
     new_takeaways: [],
