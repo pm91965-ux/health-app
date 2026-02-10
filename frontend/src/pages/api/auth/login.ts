@@ -1,40 +1,27 @@
-import { NextApiRequest, NextApiResponse } from 'next';
-import bcrypt from 'bcryptjs';
-import pool from '../../../src/lib/db';
-import { generateToken } from '../../../src/lib/auth';
+import type { NextApiRequest, NextApiResponse } from 'next';
 
-export default async function login(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method !== 'POST') {
-    return res.status(405).json({ message: 'Method not allowed' });
-  }
+const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:4000';
 
-  const { username, password } = req.body;
-
-  if (!username || !password) {
-    return res.status(400).json({ message: 'Username and password are required' });
-  }
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
   try {
-    const result = await pool.query(
-      'SELECT id, password_hash FROM users WHERE username = $1',
-      [username]
-    );
+    const r = await fetch(`${BACKEND_URL}/auth/login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(req.body),
+    });
 
-    if (result.rows.length === 0) {
-      return res.status(400).json({ message: 'Invalid credentials' });
+    const text = await r.text();
+    res.status(r.status);
+
+    // forward json if possible, otherwise forward text
+    try {
+      return res.json(JSON.parse(text));
+    } catch {
+      return res.send(text);
     }
-
-    const user = result.rows[0];
-    const passwordMatch = await bcrypt.compare(password, user.password_hash);
-
-    if (!passwordMatch) {
-      return res.status(400).json({ message: 'Invalid credentials' });
-    }
-
-    const token = generateToken(user.id);
-    res.status(200).json({ message: 'Logged in successfully', token });
-  } catch (error) {
-    console.error('Login error:', error);
-    res.status(500).json({ message: 'Internal server error' });
+  } catch (e: any) {
+    return res.status(500).json({ error: 'Auth proxy failed', detail: e?.message || String(e) });
   }
 }

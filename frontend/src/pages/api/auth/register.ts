@@ -1,35 +1,26 @@
-import { NextApiRequest, NextApiResponse } from 'next';
-import bcrypt from 'bcryptjs';
-import pool from '../../../src/lib/db';
-import { generateToken } from '../../../src/lib/auth';
+import type { NextApiRequest, NextApiResponse } from 'next';
 
-export default async function register(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method !== 'POST') {
-    return res.status(405).json({ message: 'Method not allowed' });
-  }
+const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:4000';
 
-  const { username, password } = req.body;
-
-  if (!username || !password) {
-    return res.status(400).json({ message: 'Username and password are required' });
-  }
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
   try {
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const result = await pool.query(
-      'INSERT INTO users (username, password_hash) VALUES ($1, $2) RETURNING id',
-      [username, hashedPassword]
-    );
+    const r = await fetch(`${BACKEND_URL}/auth/register`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(req.body),
+    });
 
-    const userId = result.rows[0].id;
-    const token = generateToken(userId);
+    const text = await r.text();
+    res.status(r.status);
 
-    res.status(201).json({ message: 'User registered successfully', token });
-  } catch (error: any) {
-    if (error.code === '23505') { // Unique violation code for PostgreSQL
-      return res.status(409).json({ message: 'Username already exists' });
+    try {
+      return res.json(JSON.parse(text));
+    } catch {
+      return res.send(text);
     }
-    console.error('Registration error:', error);
-    res.status(500).json({ message: 'Internal server error' });
+  } catch (e: any) {
+    return res.status(500).json({ error: 'Auth proxy failed', detail: e?.message || String(e) });
   }
 }
