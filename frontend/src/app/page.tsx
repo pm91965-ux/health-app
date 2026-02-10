@@ -16,13 +16,19 @@ export default function Home() {
   const [activeTab, setActiveTab] = useState<'coach' | 'log' | 'history' | 'profile' | 'food' | 'labs' | 'chat' | 'calendar'>('coach');
 
   // Calendar State
-  const [calendarData, setCalendarData] = useState<Record<string, any>>({});
+  const [calendarData, setCalendarData] = useState<Record<string, any> | null>(null);
   const [currentMonth, setCurrentMonth] = useState(new Date().toISOString().slice(0, 7)); // YYYY-MM
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
 
   useEffect(() => {
     if (activeTab === 'calendar' && !selectedDate) {
-        fetch(`/api/nutrition/month?month=${currentMonth}`).then(res => res.json()).then(setCalendarData);
+        fetch(`/api/nutrition/month?month=${currentMonth}`)
+            .then(res => res.json())
+            .then(setCalendarData)
+            .catch(error => {
+                console.error("Failed to fetch calendar data:", error);
+                setCalendarData(null); // Reset or set an error state
+            });
     }
   }, [activeTab, currentMonth, selectedDate]);
 
@@ -215,14 +221,14 @@ export default function Home() {
                key={tab}
                onClick={() => setActiveTab(tab as any)}
                className={`p-2 rounded-md transition-colors ${activeTab === tab ? 'bg-blue-600 text-white shadow' : 'text-gray-400 hover:text-white'}`}>
-               {tab === 'coach' && <Loader2 size={18} className={activeTab === 'coach' ? '' : 'animate-pulse-slow'} />} 
-               {tab === 'log' && <Plus size={18} />}
-               {tab === 'history' && <BookOpen size={18} />}
-               {tab === 'profile' && <User size={18} />}
-               {tab === 'food' && <Utensils size={18} />}
-               {tab === 'labs' && <TestTube size={18} />}
-               {tab === 'chat' && <MessageSquare size={18} />}
-               {tab === 'calendar' && <Calendar size={18} />}
+               {tab === 'coach' && <Loader2 size={18} className={activeTab === 'coach' ? '' : 'animate-pulse-slow'} /> 
+               {tab === 'log' && <Plus size={18} />
+               {tab === 'history' && <BookOpen size={18} />
+               {tab === 'profile' && <User size={18} />
+               {tab === 'food' && <Utensils size={18} />
+               {tab === 'labs' && <TestTube size={18} />
+               {tab === 'chat' && <MessageSquare size={18} />
+               {tab === 'calendar' && <Calendar size={18} />
              </button>
            ))}
         </div>
@@ -290,7 +296,7 @@ export default function Home() {
           </div>
           <div className="flex gap-2 mb-4 overflow-x-auto pb-2 scrollbar-hide">
             {(['Bench', 'Squat', 'Deadlift'] as LiftType[]).map(lift => (
-              <button key={lift} onClick={() => addExercise(lift)} className="bg-gray-800 border border-gray-700 px-4 py-2 rounded-full whitespace-nowrap hover:bg-gray-700 active:scale-95 transition-all text-sm font-medium">+ {lift}</button>
+              <button key={lift} onClick={() => addExercise(lift)} className="bg-gray-800 border border-gray-700 px-4 py-2 rounded-full whitespace-nowrap hover:bg-gray-700 active:scale-95 transition-all text-sm font-medium">+ {lift </button>
             ))}
           </div>
           <div className="space-y-6">
@@ -322,7 +328,7 @@ export default function Home() {
           </div>
           {currentExercises.length > 0 && (
              <div className="fixed bottom-6 left-0 right-0 px-4 max-w-md mx-auto z-30">
-                <button onClick={saveWorkout} disabled={loading} className="w-full bg-blue-600 hover:bg-blue-500 shadow-xl shadow-black/50 py-4 rounded-xl font-bold text-lg flex justify-center items-center gap-2">{loading ? <Loader2 className="animate-spin" /> : <><Save size={20} /> Save Workout</>}</button>
+                <button onClick={saveWorkout} disabled={loading} className="w-full bg-blue-600 hover:bg-blue-500 shadow-xl shadow-black/50 py-4 rounded-xl font-bold text-lg flex justify-center items-center gap-2">{loading ? <Loader2 className="animate-spin" /> : <><Save size={20} /> Save Workout</></button>
              </div>
           )}
         </div>
@@ -334,20 +340,20 @@ export default function Home() {
           <div className="bg-gray-800 p-5 rounded-xl border border-gray-700">
              <h2 className="text-lg font-bold mb-4 flex items-center gap-2"><TestTube size={20} className="text-purple-500"/> Log Lab Result</h2>
              <div className="space-y-3">
-               <input type="text" placeholder="Marker (e.g. Vitamin D)" value={labForm.marker} onChange={(e) => setLabForm({...labForm, marker: e.target.value})} className="w-full bg-gray-900 text-white rounded p-3 focus:outline-none border border-gray-700 focus:border-purple-500"/>}
+               <input type="text" placeholder="Marker (e.g. Vitamin D)" value={labForm.marker} onChange={(e) => setLabForm({...labForm, marker: e.target.value})} className="w-full bg-gray-900 text-white rounded p-3 focus:outline-none border border-gray-700 focus:border-purple-500"/>
                <div className="flex gap-2">
                  <input type="number" placeholder="Value" value={labForm.value || ''} onChange={(e) => setLabForm({...labForm, value: parseFloat(e.target.value)})} className="flex-1 bg-gray-900 text-white rounded p-3 focus:outline-none border border-gray-700 focus:border-purple-500"/>
                  <input type="text" placeholder="Unit (e.g. ng/mL)" value={labForm.unit} onChange={(e) => setLabForm({...labForm, unit: e.target.value})} className="flex-1 bg-gray-900 text-white rounded p-3 focus:outline-none border border-gray-700 focus:border-purple-500"/>
                </div>
                <input type="text" placeholder="Notes (e.g. range 30-100)" value={labForm.notes} onChange={(e) => setLabForm({...labForm, notes: e.target.value})} className="w-full bg-gray-900 text-white rounded p-3 focus:outline-none border border-gray-700 focus:border-purple-500 text-sm"/>
-               <button onClick={addLab} disabled={labLoading} className="w-full bg-purple-600 hover:bg-purple-500 py-3 rounded-lg font-bold flex justify-center items-center gap-2">{labLoading ? <Loader2 className="animate-spin" /> : 'Save Result'}</button>
+               <button onClick={addLab} disabled={labLoading} className="w-full bg-purple-600 hover:bg-purple-500 py-3 rounded-lg font-bold flex justify-center items-center gap-2">{labLoading ? <Loader2 className="animate-spin" /> : 'Save Result' </button>
              </div>
           </div>
           <div className="space-y-3">
             {labs.slice().reverse().map((lab) => (
               <div key={lab.id} className="bg-gray-800 p-4 rounded-xl border border-gray-700 flex justify-between items-center">
                 <div><h3 className="font-bold text-white">{lab.marker}</h3><p className="text-xs text-gray-400">{new Date(lab.date).toLocaleDateString()} • {lab.notes}</p></div>
-                <div className="text-right"><div className="text-xl font-bold text-purple-400">{lab.value} <span className="text-sm text-gray-500"></span></div></div>
+                <div className="text-right"><div className="text-xl font-bold text-purple-400">{lab.value} <span className="text-sm text-gray-500">{lab.unit}</span></div></div>
               </div>
             ))}
           </div>
@@ -393,30 +399,34 @@ export default function Home() {
             <h2 className="font-bold text-lg">{new Date(currentMonth).toLocaleString('default', { month: 'long', year: 'numeric' })}</h2>
             <button onClick={() => setCurrentMonth(prev => { const d = new Date(prev + '-01'); d.setMonth(d.getMonth() + 1); return d.toISOString().slice(0, 7); })} className="p-2 hover:bg-gray-700 rounded text-gray-400">→</button>
           </div>
-          <div className="grid grid-cols-7 gap-1">
-            {['S','M','T','W','T','F','S'].map((d, i) => (<div key={`header-${i}`} className="text-center text-xs text-gray-500 font-bold py-2">{d}</div>))}
-            {Array.from({ length: new Date(currentMonth + '-01').getDay() }).map((_, i) => (<div key={`empty-${i}`} className="bg-transparent h-20"></div>))}
-            {Array.from({ length: new Date(new Date(currentMonth).getFullYear(), new Date(currentMonth).getMonth() + 1, 0).getDate() }).map((_, i) => {
-              const day = i + 1;
-              const dateStr = `${currentMonth}-${day.toString().padStart(2, '0')}`;
-              const data = calendarData[dateStr];
-              return (
-                <div key={day} onClick={() => setSelectedDate(dateStr)} className="bg-gray-800 border border-gray-700 rounded-lg h-24 p-1 flex flex-col justify-between hover:bg-gray-700 cursor-pointer transition-colors">
-                  <div className="text-xs text-gray-400 font-bold">{day}</div>
-                  {data && (
-                    <div className="space-y-1">
-                      <div className="text-xs text-yellow-500 font-bold leading-none">{Math.round(data.calories)}</div>
-                      <div className="flex flex-col gap-0.5 text-[9px] font-mono leading-tight">
-                        <span className="text-blue-400">{Math.round(data.protein)}p</span>
-                        <span className="text-green-400">{Math.round(data.carbs)}c</span>
-                        <span className="text-red-400">{Math.round(data.fat)}f</span>
+          {calendarData ? (
+            <div className="grid grid-cols-7 gap-1">
+              {['S','M','T','W','T','F','S'].map((d, i) => (<div key={`header-${i}`} className="text-center text-xs text-gray-500 font-bold py-2">{d}</div>))}
+              {Array.from({ length: new Date(currentMonth + '-01').getDay() }).map((_, i) => (<div key={`empty-${i}`} className="bg-transparent h-20"></div>))}
+              {Array.from({ length: new Date(new Date(currentMonth).getFullYear(), new Date(currentMonth).getMonth() + 1, 0).getDate() }).map((_, i) => {
+                const day = i + 1;
+                const dateStr = `${currentMonth}-${day.toString().padStart(2, '0')}`;
+                const data = calendarData[dateStr];
+                return (
+                  <div key={day} onClick={() => setSelectedDate(dateStr)} className="bg-gray-800 border border-gray-700 rounded-lg h-24 p-1 flex flex-col justify-between hover:bg-gray-700 cursor-pointer transition-colors">
+                    <div className="text-xs text-gray-400 font-bold">{day}</div>
+                    {data && (
+                      <div className="space-y-1">
+                        <div className="text-xs text-yellow-500 font-bold leading-none">{Math.round(data.calories)}</div>
+                        <div className="flex flex-col gap-0.5 text-[9px] font-mono leading-tight">
+                          <span className="text-blue-400">{Math.round(data.protein)}p</span>
+                          <span className="text-green-400">{Math.round(data.carbs)}c</span>
+                          <span className="text-red-400">{Math.round(data.fat)}f</span>
+                        </div>
                       </div>
-                    </div>
-                  )}
-                </div>
-              );
-            })}
-          </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          ) : (
+            <p className="text-center text-gray-500">Loading calendar data...</p>
+          )}
           </>
           )}
         </div>
@@ -488,7 +498,7 @@ export default function Home() {
           <div className="bg-gray-800 p-4 rounded-xl border border-gray-700 flex gap-2">
             <button onClick={() => startListening((text) => setFoodInput(text))} className={`p-3 rounded-lg text-white ${isListening ? 'bg-red-600 animate-pulse' : 'bg-gray-900 hover:bg-gray-700 border border-gray-600'}`}><Mic size={20} /></button>
             <input type="text" value={foodInput} onChange={(e) => setFoodInput(e.target.value)} placeholder="e.g. 200g Steak and Rice" className="flex-1 bg-gray-900 text-white rounded-lg p-3 focus:outline-none focus:ring-1 focus:ring-blue-500 placeholder-gray-600" onKeyDown={(e) => e.key === 'Enter' && addFood()}/>
-            <button onClick={addFood} disabled={foodLoading} className="bg-blue-600 hover:bg-blue-500 px-4 rounded-lg font-bold flex items-center">{foodLoading ? <Loader2 className="animate-spin" /> : <Plus />}</button>
+            <button onClick={addFood} disabled={foodLoading} className="bg-blue-600 hover:bg-blue-500 px-4 rounded-lg font-bold flex items-center">{foodLoading ? <Loader2 className="animate-spin" /> : <Plus /></button>
           </div>
           <div className="space-y-3">
              {nutrition.meals.length === 0 && <p className="text-center text-gray-500 py-4">No meals logged today.</p>}
@@ -522,13 +532,30 @@ export default function Home() {
 
 function DayList({ date, onEdit, onDelete }: { date: string; onEdit: any; onDelete: any }) {
   const [data, setData] = useState<DayNutrition | null>(null);
+  const [loading, setLoading] = useState(true); // Add loading state
 
   useEffect(() => {
-    fetch(`/api/nutrition?date=${date}`).then(res => res.json()).then(setData);
+    let alive = true;
+    setLoading(true);
+    // Assuming 'api' is an Axios instance or similar that returns a promise
+    fetch(`/api/nutrition?date=${date}`)
+      .then(res => res.json())
+      .then(data => {
+        if (alive) setData(data);
+      })
+      .catch(err => {
+        console.error(err); // Log the error, optionally set an error state here
+      })
+      .finally(() => {
+        if (alive) setLoading(false);
+      });
+
+    return () => {
+      alive = false;
+    };
   }, [date]);
 
-  if (!data) return <Loader2 className="animate-spin" />;
-
+  if (loading) return <div>Loading...</div>;
   return (
     <div className="space-y-3">
        {data.meals.length === 0 && <p className="text-gray-500">No meals logged.</p>}
