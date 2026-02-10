@@ -221,14 +221,14 @@ export default function Home() {
                key={tab}
                onClick={() => setActiveTab(tab as any)}
                className={`p-2 rounded-md transition-colors ${activeTab === tab ? 'bg-blue-600 text-white shadow' : 'text-gray-400 hover:text-white'}`}>
-               {tab === 'coach' && <Loader2 size={18} className={activeTab === 'coach' ? '' : 'animate-pulse-slow'} /> 
-               {tab === 'log' && <Plus size={18} />
-               {tab === 'history' && <BookOpen size={18} />
-               {tab === 'profile' && <User size={18} />
-               {tab === 'food' && <Utensils size={18} />
-               {tab === 'labs' && <TestTube size={18} />
-               {tab === 'chat' && <MessageSquare size={18} />
-               {tab === 'calendar' && <Calendar size={18} />
+               {tab === 'coach' && <Loader2 size={18} className={activeTab === 'coach' ? '' : 'animate-pulse-slow'} /> }
+               {tab === 'log' && <Plus size={18} />}
+               {tab === 'history' && <BookOpen size={18} />}
+               {tab === 'profile' && <User size={18} />}
+               {tab === 'food' && <Utensils size={18} />}
+               {tab === 'labs' && <TestTube size={18} />}
+               {tab === 'chat' && <MessageSquare size={18} />}
+               {tab === 'calendar' && <Calendar size={18} />}
              </button>
            ))}
         </div>
@@ -296,7 +296,7 @@ export default function Home() {
           </div>
           <div className="flex gap-2 mb-4 overflow-x-auto pb-2 scrollbar-hide">
             {(['Bench', 'Squat', 'Deadlift'] as LiftType[]).map(lift => (
-              <button key={lift} onClick={() => addExercise(lift)} className="bg-gray-800 border border-gray-700 px-4 py-2 rounded-full whitespace-nowrap hover:bg-gray-700 active:scale-95 transition-all text-sm font-medium">+ {lift </button>
+              <button key={lift} onClick={() => addExercise(lift)} className="bg-gray-800 border border-gray-700 px-4 py-2 rounded-full whitespace-nowrap hover:bg-gray-700 active:scale-95 transition-all text-sm font-medium">+ {lift} </button>
             ))}
           </div>
           <div className="space-y-6">
@@ -328,7 +328,20 @@ export default function Home() {
           </div>
           {currentExercises.length > 0 && (
              <div className="fixed bottom-6 left-0 right-0 px-4 max-w-md mx-auto z-30">
-                <button onClick={saveWorkout} disabled={loading} className="w-full bg-blue-600 hover:bg-blue-500 shadow-xl shadow-black/50 py-4 rounded-xl font-bold text-lg flex justify-center items-center gap-2">{loading ? <Loader2 className="animate-spin" /> : <><Save size={20} /> Save Workout</></button>
+       <button
+  onClick={saveWorkout}
+  disabled={loading}
+  className="w-full bg-blue-600 hover:bg-blue-500 shadow-xl shadow-black/50 py-4 rounded-xl font-bold text-lg flex justify-center items-center gap-2"
+>
+  {loading ? (
+    <Loader2 className="animate-spin" />
+  ) : (
+    <>
+      <Save size={20} /> Save Workout
+    </>
+  )}
+</button>
+
              </div>
           )}
         </div>
@@ -346,7 +359,14 @@ export default function Home() {
                  <input type="text" placeholder="Unit (e.g. ng/mL)" value={labForm.unit} onChange={(e) => setLabForm({...labForm, unit: e.target.value})} className="flex-1 bg-gray-900 text-white rounded p-3 focus:outline-none border border-gray-700 focus:border-purple-500"/>
                </div>
                <input type="text" placeholder="Notes (e.g. range 30-100)" value={labForm.notes} onChange={(e) => setLabForm({...labForm, notes: e.target.value})} className="w-full bg-gray-900 text-white rounded p-3 focus:outline-none border border-gray-700 focus:border-purple-500 text-sm"/>
-               <button onClick={addLab} disabled={labLoading} className="w-full bg-purple-600 hover:bg-purple-500 py-3 rounded-lg font-bold flex justify-center items-center gap-2">{labLoading ? <Loader2 className="animate-spin" /> : 'Save Result' </button>
+<button
+  onClick={addLab}
+  disabled={labLoading}
+  className="w-full bg-purple-600 hover:bg-purple-500 py-3 rounded-lg font-bold flex justify-center items-center gap-2"
+>
+  {labLoading ? <Loader2 className="animate-spin" /> : 'Save Result'}
+</button>
+
              </div>
           </div>
           <div className="space-y-3">
@@ -498,7 +518,14 @@ export default function Home() {
           <div className="bg-gray-800 p-4 rounded-xl border border-gray-700 flex gap-2">
             <button onClick={() => startListening((text) => setFoodInput(text))} className={`p-3 rounded-lg text-white ${isListening ? 'bg-red-600 animate-pulse' : 'bg-gray-900 hover:bg-gray-700 border border-gray-600'}`}><Mic size={20} /></button>
             <input type="text" value={foodInput} onChange={(e) => setFoodInput(e.target.value)} placeholder="e.g. 200g Steak and Rice" className="flex-1 bg-gray-900 text-white rounded-lg p-3 focus:outline-none focus:ring-1 focus:ring-blue-500 placeholder-gray-600" onKeyDown={(e) => e.key === 'Enter' && addFood()}/>
-            <button onClick={addFood} disabled={foodLoading} className="bg-blue-600 hover:bg-blue-500 px-4 rounded-lg font-bold flex items-center">{foodLoading ? <Loader2 className="animate-spin" /> : <Plus /></button>
+            <button
+  onClick={addFood}
+  disabled={foodLoading}
+  className="bg-blue-600 hover:bg-blue-500 px-4 rounded-lg font-bold flex items-center"
+>
+  {foodLoading ? <Loader2 className="animate-spin" /> : <Plus />}
+</button>
+
           </div>
           <div className="space-y-3">
              {nutrition.meals.length === 0 && <p className="text-center text-gray-500 py-4">No meals logged today.</p>}
@@ -531,7 +558,12 @@ export default function Home() {
 }
 
 function DayList({ date, onEdit, onDelete }: { date: string; onEdit: any; onDelete: any }) {
-  const [data, setData] = useState<DayNutrition | null>(null);
+  const [data, setData] = useState<DayNutrition>({
+  date,
+  meals: [],
+  total: { calories: 0, protein: 0, carbs: 0, fat: 0 },
+});
+
   const [loading, setLoading] = useState(true); // Add loading state
 
   useEffect(() => {
