@@ -1,0 +1,223 @@
+[
+  {
+    "id": "1770223169700",
+    "date": "2026-02-04",
+    "time": "05:39 PM",
+    "description": "450g Skyr with Cocoa",
+    "macros": {
+      "calories": 360,
+      "protein": 45,
+      "carbs": 40,
+      "fat": 2
+    },
+    "ai_analysis": "Excellent source of high-quality protein and relatively low in fat, but cocoa adds carbs (mostly sugars)."
+  },
+  {
+    "id": "1770223273834",
+    "date": "2026-02-04",
+    "time": "05:41 PM",
+    "description": "1 apple, 2 bananas, 2 carrots, 60g protein powder, 1 cube frozen spinach",
+    "macros": {
+      "calories": 450,
+      "protein": 55,
+      "carbs": 68,
+      "fat": 5
+    },
+    "ai_analysis": "Excellent source of protein and carbohydrates, with minimal fat; consider adding a source of healthy fats for improved satiety."
+  },
+  {
+    "id": "1770223305989",
+    "date": "2026-02-04",
+    "time": "05:41 PM",
+    "description": "100g of cashew nuts",
+    "macros": {
+      "calories": 553,
+      "protein": 18,
+      "carbs": 30,
+      "fat": 44
+    },
+    "ai_analysis": "Cashews are a good source of healthy fats and plant-based protein."
+  },
+  {
+    "id": "1770224425638",
+    "date": "2026-02-04",
+    "time": "06:00 PM",
+    "description": "250g Salmon, 50g Buckwheat Pasta, 1 tbsp Peanut Butter",
+    "macros": {
+      "calories": 645,
+      "protein": 58,
+      "carbs": 40,
+      "fat": 31
+    },
+    "ai_analysis": "This meal provides a good balance of protein, healthy fats, and complex carbohydrates."
+  },
+  {
+    "id": "1770224957609",
+    "date": "2026-02-04",
+    "time": "06:09 PM",
+    "description": "4 Cherry Tomatoes and 1 Peach",
+    "macros": {
+      "calories": 55,
+      "protein": 1,
+      "carbs": 14,
+      "fat": 0
+    },
+    "ai_analysis": "This snack provides a good source of vitamins and fiber with minimal fat and calories."
+  },
+  {
+    "id": "1770303335109",
+    "date": "2026-02-05",
+    "time": "03:55 PM",
+    "description": "70g cashew nuts",
+    "macros": {
+      "calories": 410,
+      "protein": 10,
+      "carbs": 23,
+      "fat": 33
+    },
+    "ai_analysis": "Cashew nuts are a good source of healthy fats and minerals but should be consumed in moderation due to their high calorie content."
+  },
+  {
+    "id": "1770303349952",
+    "date": "2026-02-05",
+    "time": "03:55 PM",
+    "description": "Half of a banana bread loaf",
+    "macros": {
+      "calories": 450,
+      "protein": 5,
+      "carbs": 70,
+      "fat": 18
+    },
+    "ai_analysis": "High in carbohydrates and fat, and lower in protein, so it is less optimal for overall health."
+  },
+  {
+    "id": "1770316811014",
+    "date": "2026-02-05",
+    "time": "07:40 PM",
+    "description": "250g Salmon, 1/2 Avocado, 7 Mini Tomatoes, Rucola, 25g Quinoa, 1/2 Persimmon, 10 Blueberries, 30g Peanut Butter, 10g Ginger, 10g Sweet and Sour Sauce, 10g Peanuts, Rucola",
+    "macros": {
+      "calories": 815,
+      "protein": 53,
+      "carbs": 47,
+      "fat": 50
+    },
+    "ai_analysis": "This is a nutritionally balanced meal with good sources of omega-3 fatty acids, protein, fiber, and healthy fats, but the sweet and sour sauce contributes added sugars."
+  },
+  {
+    "id": "1770317515938",
+    "date": "2026-02-05",
+    "time": "07:51 PM",
+    "description": "Shake with 2 bananas, 60g protein powder (70% protein), 2 carrots, 1 apple, 1 cube spinach, and water.",
+    "macros": {
+      "calories": 440,
+      "protein": 47,
+      "carbs": 68,
+      "fat": 3
+    },
+    "ai_analysis": "This shake is a good source of protein and carbohydrates, with very little fat, and contains vitamins and minerals from the fruits and vegetables."
+  },
+  {
+    "id": "1770318779661",
+    "date": "2026-02-05",
+    "time": "08:12 PM",
+    "description": "400g skyr",
+    "macros": {
+      "calories": 240,
+      "protein": 48,
+      "carbs": 16,
+      "fat": 0.8
+    },
+    "ai_analysis": "Based on standard Skyr nutritional values per 100g."
+  },
+  {
+    "id": "1770318832908",
+    "date": "2026-02-05",
+    "time": "08:13 PM",
+    "description": "1l Tegernsee beer",
+    "macros": {
+      "calories": 500,
+      "protein": 4,
+      "carbs": 30,
+      "fat": 0
+    },
+    "ai_analysis": "Based on average values for typical German beer."
+  },
+  {
+    "id": "1770372247313",
+    "date": "2026-02-06",
+    "time": "11:04 AM",
+    "description": "1 carrot, 2 scoops of protein powder, 3 bananas, one persimmon, one cube of frozen spinach",
+    "macros": {
+      "calories": 591,
+      "protein": 53,
+      "carbs": 119,
+      "fat": 7
+    },
+    "ai_analysis": "Based on: 1 raw carrot (50g), 2 scoops protein powder (60g), 3 medium bananas (360g), 1 persimmon (168g), 1 cube frozen spinach (30g). Protein calculation based on user-defined scoop protein concentration."
+  },
+  {
+    "id": "1770372388831",
+    "date": "2026-02-06",
+    "time": "11:06 AM",
+    "description": "Coffee with 50ml oat milk",
+    "macros": {
+      "calories": 25,
+      "protein": 0.5,
+      "carbs": 5,
+      "fat": 0.5
+    },
+    "ai_analysis": "50ml oat milk contains approximately 25 calories, 0.5g protein, 5g carbs and 0.5g fat. Coffee is negligible."
+  },
+  {
+    "id": "1770372410655",
+    "date": "2026-02-06",
+    "time": "11:06 AM",
+    "description": "Coffee with 50ml oat milk",
+    "macros": {
+      "calories": 25,
+      "protein": 0.5,
+      "carbs": 5,
+      "fat": 0.5
+    },
+    "ai_analysis": "Copied meal"
+  },
+  {
+    "id": "1770548989934",
+    "date": "2026-02-08",
+    "time": "12:09 PM",
+    "description": "Shake with 2 bananas, 60g protein powder, 2 carrots, 1 apple, 1 cube spinach, and water.",
+    "macros": {
+      "calories": 550,
+      "protein": 65,
+      "carbs": 75,
+      "fat": 5
+    },
+    "ai_analysis": "Copied meal"
+  },
+  {
+    "id": "1770548993764",
+    "date": "2026-02-08",
+    "time": "12:09 PM",
+    "description": "Coffee with 50ml oat milk",
+    "macros": {
+      "calories": 25,
+      "protein": 0.5,
+      "carbs": 5,
+      "fat": 0.5
+    },
+    "ai_analysis": "Copied meal"
+  },
+  {
+    "id": "1770548994479",
+    "date": "2026-02-08",
+    "time": "12:09 PM",
+    "description": "Coffee with 50ml oat milk",
+    "macros": {
+      "calories": 25,
+      "protein": 0.5,
+      "carbs": 5,
+      "fat": 0.5
+    },
+    "ai_analysis": "Copied meal"
+  }
+]

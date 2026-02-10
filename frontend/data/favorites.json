@@ -1,0 +1,24 @@
+[
+  {
+    "id": "1770303317921",
+    "name": "Morning Shake",
+    "description": "Shake with 2 bananas, 60g protein powder, 2 carrots, 1 apple, 1 cube spinach, and water.",
+    "macros": {
+      "calories": 550,
+      "protein": 65,
+      "carbs": 75,
+      "fat": 5
+    }
+  },
+  {
+    "id": "1770372400947",
+    "name": "Coffee with oat milk",
+    "description": "Coffee with 50ml oat milk",
+    "macros": {
+      "calories": 25,
+      "protein": 0.5,
+      "carbs": 5,
+      "fat": 0.5
+    }
+  }
+]

@@ -1,0 +1,42 @@
+{
+  "name": "Owner",
+  "stats": {
+    "weight": 92,
+    "height": 190,
+    "age": 40,
+    "gender": "male"
+  },
+  "goals": {
+    "short_term": [
+      "Squat 100x5",
+      "Bench 90x5"
+    ],
+    "long_term": [
+      "Squat 120-140kg",
+      "Bench 100kg+"
+    ]
+  },
+  "principles": [
+    "Heavy work is only productive if clean; if bar speed slows, pivot to volume.",
+    "No grinding reps (RPE 10 is rarely the goal).",
+    "Deadlifts: Start every rep from the floor (dead stop).",
+    "Warmups: Longer warmups preferred for confidence.",
+    "Sick/Low Readiness: Immediately shift to volume work, do not force heavy weights."
+  ],
+  "physical_context": [
+    "Supplements: Creatine 5g/day (started 2026-01-10).",
+    "Knee: Doing indoor cycling (130bpm) + physio stabilization. Needs short stabilization work after cycling.",
+    "Shoulder: Considering Turkish Get-Ups (16kg) for stability."
+  ],
+  "nutrition_rules": [
+    "Protein Powder: Scoop is 30g containing 22g protein (75% concentration).",
+    "I use olive oil for salads (assume 1 tbsp if not specified)."
+  ],
+  "takeaways": [
+    "Squat: Progressed from 80-82 volume to 100x4 heavy.",
+    "Bench: 90x2 was slow/grindy; needs backoff volume (80-82) to stabilize.",
+    "Deadlift: 110x5 was heavy (singles); goal is to make it a continuous set before moving up.",
+    "Bench: 80kg volume felt controlled with RPE 8, moving towards RPE 9 on later sets, suggesting good backoff volume for stabilization.",
+    "Deadlift volume at 100kg RPE 8 consistent across multiple sets."
+  ]
+}

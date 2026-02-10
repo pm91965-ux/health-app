@@ -1,0 +1,54 @@
+[
+  {
+    "id": "init-import-1",
+    "date": "2026-02-02",
+    "exercises": [
+      {
+        "name": "Squat",
+        "sets": [
+          { "weight": 100, "reps": 4, "rpe": 9 },
+          { "weight": 88, "reps": 5, "rpe": 8 },
+          { "weight": 88, "reps": 5, "rpe": 8 }
+        ],
+        "notes": "100x4: 4th slower but good. Backoffs solid."
+      }
+    ]
+  },
+  {
+    "id": "init-import-2",
+    "date": "2026-02-01",
+    "exercises": [
+      {
+        "name": "Bench",
+        "sets": [
+          { "weight": 88, "reps": 3, "rpe": 9 },
+          { "weight": 90, "reps": 2, "rpe": 10 },
+          { "weight": 80, "reps": 5, "rpe": 8 }
+        ],
+        "notes": "90x2 slow, slight bounce. 100x1 success earlier."
+      },
+      {
+        "name": "Deadlift",
+        "sets": [
+          { "weight": 110, "reps": 5, "rpe": 9.5 },
+          { "weight": 100, "reps": 5, "rpe": 8 },
+          { "weight": 100, "reps": 5, "rpe": 8 }
+        ],
+        "notes": "110x5 done as 5 singles. Felt heavy."
+      }
+    ]
+  },
+  {
+    "id": "init-import-3",
+    "date": "2026-01-30",
+    "exercises": [
+      {
+        "name": "Deadlift",
+        "sets": [
+          { "weight": 116, "reps": 5, "rpe": 9.5 }
+        ],
+        "notes": "Taxing, out of breath."
+      }
+    ]
+  }
+]
