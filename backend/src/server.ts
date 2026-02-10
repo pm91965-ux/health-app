@@ -5,6 +5,8 @@ import cors from 'cors';
 import { PrismaClient } from '@prisma/client';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+// import { getRecommendation, analyzeSession } from './aiService'; // Commented out AI import
+// import { WorkoutSession, UserProfile, DayNutrition, LabResult } from './types'; // Commented out AI-related types import
 
 const app = express();
 const prisma = new PrismaClient();
@@ -12,7 +14,8 @@ const PORT = process.env.PORT || 4000;
 const JWT_SECRET = process.env.JWT_SECRET || 'supersecretjwtkey'; // This should be a strong, randomly generated key in production
 
 app.use(express.json());
-app.use(cors()); // Enable CORS for frontend communication
+// Configure CORS to be more restrictive in production
+app.use(cors({ origin: process.env.FRONTEND_URL || '*' })); // IMPORTANT: Set FRONTEND_URL in Vercel for production
 
 // --- Authentication Routes ---
 
@@ -120,12 +123,13 @@ app.post('/api/workouts', authenticateToken, async (req: AuthRequest, res) => {
         exercises: {
           create: exercises.map((ex: any) => ({
             name: ex.name,
-            sets: ex.sets, // Assuming sets is already an array of objects
+            sets: ex.sets,
           })),
         },
       },
       include: { exercises: true },
     });
+
     res.status(201).json({ message: 'Workout session saved.', session: newSession });
   } catch (error) {
     console.error('Error saving workout session:', error);
@@ -133,40 +137,30 @@ app.post('/api/workouts', authenticateToken, async (req: AuthRequest, res) => {
   }
 });
 
-// Recommendation route - This will need to integrate with the existing AI logic
-// For now, it's a placeholder. The original AI logic is CLI-based.
-// We'll need to adapt getHistory and getRecommendation.
-import { getRecommendation } from './ai'; // Assuming ai.ts can be used directly or adapted
-import { WorkoutSession } from './types'; // Assuming types.ts is compatible
-
-app.post('/api/recommendation', authenticateToken, async (req: AuthRequest, res) => {
-  try {
-    // Fetch history for the authenticated user from PostgreSQL
-    const history = await prisma.workoutSession.findMany({
-      where: { userId: req.userId },
-      include: { exercises: true },
-      orderBy: { date: 'asc' }, // Order by date for history
-    });
-
-    // Adapt the history to the format expected by getRecommendation if necessary
-    const adaptedHistory: WorkoutSession[] = history.map(session => ({
-      id: session.id,
-      date: session.date.toISOString(),
-      exercises: session.exercises.map(exercise => ({
-        name: exercise.name as any, // Cast as any if Exercise type is stricter
-        sets: exercise.sets as any, // Cast as any if Sets type is stricter
-      })),
-    }));
+// AI Recommendation route - now uses aiService
+// app.post('/api/recommend', authenticateToken, async (req: AuthRequest, res) => {
+//   try {
+//     const { history, profile, nutrition, labs, focus } = req.body;
     
-    // Call the AI recommendation function
-    const recommendation = await getRecommendation(adaptedHistory);
-    res.json(recommendation);
-  } catch (error) {
-    console.error('Error getting recommendation:', error);
-    res.status(500).json({ message: 'Error generating recommendation.' });
-  }
-});
+//     const recommendation = await getRecommendation(history, profile, nutrition, labs, focus);
+//     res.json(recommendation);
+//   } catch (error) {
+//     console.error('Error getting recommendation:', error);
+//     res.status(500).json({ message: 'Error generating recommendation.' });
+//   }
+// });
 
+// New AI Workout Analysis route
+// app.post('/api/workout-analysis', authenticateToken, async (req: AuthRequest, res) => {
+//   try {
+//     const { session, history, profile } = req.body; // Expecting these from frontend
+//     const analysis = await analyzeSession(session, history, profile);
+//     res.json(analysis);
+//   } catch (error) {
+//     console.error('Error during workout analysis:', error);
+//     res.status(500).json({ message: 'Error performing workout analysis.' });
+//   }
+// });
 
 // Start the server
 export default app;

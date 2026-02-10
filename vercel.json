@@ -1,0 +1,29 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "frontend/package.json",
+      "use": "@vercel/next"
+    },
+    {
+      "src": "backend/api/index.ts",
+      "use": "@vercel/node",
+      "config": {
+        "includeFiles": [
+          "backend/dist/**",
+          "backend/src/prompts.ts",
+          "backend/src/types.ts",
+          "backend/prisma/**",
+          "backend/package.json",
+          "backend/package-lock.json"
+        ]
+      }
+    }
+  ],
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "/backend/api/index.ts" },
+    { "source": "/(.*)", "destination": "/frontend/$1" }
+  ],
+  "installCommand": "npm install --prefix frontend && npm install --prefix backend",
+  "buildCommand": "npm run build --prefix frontend && npm run build --prefix backend"
+}
