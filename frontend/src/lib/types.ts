@@ -19,6 +19,18 @@ export interface WorkoutSession {
   exercises: Exercise[];
   overallFeeling?: string;
 }
+export type WorkoutPlanExercise = {
+  name: string;
+  notes?: string;
+  weight: number;
+  sets: number;
+  reps: number;
+};
+
+export type WorkoutPlan = {
+  reasoning: string;
+  plan: WorkoutPlanExercise[];
+};
 
 export interface UserProfile {
   name: string;
@@ -32,3 +44,31 @@ export interface UserProfile {
   takeaways: string[];
 }
 
+export interface Macros {
+  calories: number;
+  protein: number;
+  carbs: number;
+  fat: number;
+}
+
+export interface Meal {
+  id: string;
+  description: string;
+  macros: Macros;
+  time: string;
+  date: string; // ISO string
+  ai_analysis?: string;
+}
+
+export interface DayNutrition {
+  date: string; // ISO string
+  meals: Meal[];
+  total: Macros;
+}
+
+export interface FavoriteMeal {
+  id: string;
+  name: string;
+  description: string;
+  macros: Macros;
+}
