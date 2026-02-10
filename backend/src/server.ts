@@ -2,7 +2,7 @@
 import 'dotenv/config';
 import express, { Request, Response, NextFunction } from 'express'; // Explicitly import Request, Response, NextFunction
 import cors from 'cors';
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, Prisma } from '@prisma/client'; // Import Prisma for JsonValue type
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 // import { getRecommendation, analyzeSession } from './aiService'; // Commented out AI import
@@ -123,7 +123,7 @@ app.post('/api/workouts', authenticateToken, async (req: AuthRequest, res: Respo
         exercises: {
           create: exercises.map((ex: any) => ({
             name: ex.name,
-            sets: ex.sets,
+            sets: ex.sets as Prisma.JsonArray, // Explicitly cast to Prisma.JsonArray
           })),
         },
       },
